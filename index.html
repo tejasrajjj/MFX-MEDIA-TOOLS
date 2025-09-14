@@ -1,0 +1,626 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MFX MEDIA TOOLS - All-in-One Media Utilities</title>
+    <meta name="description" content="Free online media tools for image compression, conversion, editing and more. Optimize your media files with MFX MEDIA TOOLS.">
+    <meta name="keywords" content="media tools, image compression, image converter, video tools, audio tools, online utilities">
+    <!-- Favicon -->
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🎨</text></svg>">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #4361ee;
+            --secondary: #3a0ca3;
+            --accent: #f72585;
+            --light: #f8f9fa;
+            --dark: #212529;
+            --success: #4cc9f0;
+            --gray: #6c757d;
+            --border-radius: 12px;
+            --box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            --transition: all 0.3s ease;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #f5f7fa 0%, #e5e9f0 100%);
+            color: var(--dark);
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+        
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Header Styles */
+        header {
+            background: white;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 0;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-weight: 700;
+            font-size: 24px;
+            color: var(--primary);
+            text-decoration: none;
+        }
+        
+        .logo i {
+            color: var(--accent);
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 30px;
+        }
+        
+        nav a {
+            text-decoration: none;
+            color: var(--dark);
+            font-weight: 500;
+            transition: var(--transition);
+            position: relative;
+        }
+        
+        nav a:hover {
+            color: var(--primary);
+        }
+        
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 3px;
+            background: var(--primary);
+            border-radius: 3px;
+            transition: var(--transition);
+        }
+        
+        nav a:hover::after {
+            width: 100%;
+        }
+        
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 24px;
+            cursor: pointer;
+            color: var(--dark);
+        }
+        
+        /* Hero Section */
+        .hero {
+            padding: 80px 0;
+            text-align: center;
+        }
+        
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .hero p {
+            font-size: 1.2rem;
+            color: var(--gray);
+            max-width: 700px;
+            margin: 0 auto 40px;
+        }
+        
+        .cta-button {
+            display: inline-block;
+            padding: 15px 35px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            text-decoration: none;
+            box-shadow: 0 10px 20px rgba(67, 97, 238, 0.3);
+        }
+        
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 25px rgba(67, 97, 238, 0.4);
+        }
+        
+        /* Tools Grid */
+        .section-title {
+            text-align: center;
+            margin-bottom: 50px;
+            font-size: 2.5rem;
+            color: var(--dark);
+            position: relative;
+        }
+        
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: linear-gradient(to right, var(--primary), var(--accent));
+            border-radius: 2px;
+        }
+        
+        .tools-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin: 60px 0;
+        }
+        
+        .tool-card {
+            background: white;
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            transition: var(--transition);
+            box-shadow: var(--box-shadow);
+        }
+        
+        .tool-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+        }
+        
+        .tool-card-header {
+            padding: 25px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            text-align: center;
+        }
+        
+        .tool-card-header i {
+            font-size: 40px;
+            margin-bottom: 15px;
+        }
+        
+        .tool-card-header h3 {
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+        }
+        
+        .tool-card-body {
+            padding: 25px;
+        }
+        
+        .tool-card-body p {
+            color: var(--gray);
+            margin-bottom: 20px;
+        }
+        
+        .tool-button {
+            display: block;
+            width: 100%;
+            padding: 12px;
+            background: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: var(--transition);
+            text-align: center;
+            text-decoration: none;
+        }
+        
+        .tool-button:hover {
+            background: var(--secondary);
+        }
+        
+        /* Features Section */
+        .features {
+            padding: 80px 0;
+            background: white;
+        }
+        
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        
+        .feature-card {
+            text-align: center;
+            padding: 30px;
+            border-radius: var(--border-radius);
+            transition: var(--transition);
+        }
+        
+        .feature-card:hover {
+            background: var(--light);
+            transform: translateY(-5px);
+        }
+        
+        .feature-card i {
+            font-size: 50px;
+            color: var(--primary);
+            margin-bottom: 20px;
+        }
+        
+        .feature-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            color: var(--dark);
+        }
+        
+        .feature-card p {
+            color: var(--gray);
+        }
+        
+        /* Footer */
+        footer {
+            background: var(--dark);
+            color: white;
+            padding: 60px 0 30px;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+        
+        .footer-column h3 {
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+            color: var(--success);
+        }
+        
+        .footer-column ul {
+            list-style: none;
+        }
+        
+        .footer-column ul li {
+            margin-bottom: 12px;
+        }
+        
+        .footer-column a {
+            color: #ccc;
+            text-decoration: none;
+            transition: var(--transition);
+        }
+        
+        .footer-column a:hover {
+            color: white;
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        .social-links a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            transition: var(--transition);
+        }
+        
+        .social-links a:hover {
+            background: var(--primary);
+            transform: translateY(-3px);
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: #aaa;
+            font-size: 0.9rem;
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 992px) {
+            .hero h1 {
+                font-size: 2.8rem;
+            }
+            
+            nav ul {
+                gap: 20px;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .header-content {
+                padding: 15px 0;
+            }
+            
+            nav ul {
+                display: none;
+            }
+            
+            .mobile-menu-btn {
+                display: block;
+            }
+            
+            .hero h1 {
+                font-size: 2.3rem;
+            }
+            
+            .hero p {
+                font-size: 1.1rem;
+            }
+            
+            .section-title {
+                font-size: 2rem;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .hero {
+                padding: 60px 0;
+            }
+            
+            .hero h1 {
+                font-size: 2rem;
+            }
+            
+            .cta-button {
+                padding: 12px 25px;
+            }
+            
+            .tool-card-header {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <a href="#" class="logo">
+                    <i class="fas fa-tools"></i>
+                    MFX MEDIA TOOLS
+                </a>
+                <nav>
+                    <ul>
+                        <li><a href="#">Home</a></li>
+                        <li><a href="#tools">Tools</a></li>
+                        <li><a href="#features">Features</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                    </ul>
+                    <button class="mobile-menu-btn">
+                        <i class="fas fa-bars"></i>
+                    </button>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <h1>All Your Media Tools in One Place</h1>
+            <p>MFX MEDIA TOOLS offers a comprehensive suite of free online utilities for all your image, video, and audio processing needs. Fast, secure, and easy to use.</p>
+            <a href="#tools" class="cta-button">Explore Tools</a>
+        </div>
+    </section>
+
+    <!-- Tools Grid -->
+    <section id="tools" class="container">
+        <h2 class="section-title">Our Tools</h2>
+        <div class="tools-grid">
+            <div class="tool-card">
+                <div class="tool-card-header">
+                    <i class="fas fa-compress-arrows-alt"></i>
+                    <h3>Image Compressor</h3>
+                </div>
+                <div class="tool-card-body">
+                    <p>Reduce image file size without losing quality. Support for JPG, PNG, and WebP formats.</p>
+                    <a href="img-compress.html" class="tool-button">Use Tool</a>
+                </div>
+            </div>
+            
+            <div class="tool-card">
+                <div class="tool-card-header">
+                    <i class="fas fa-exchange-alt"></i>
+                    <h3>Format Converter</h3>
+                </div>
+                <div class="tool-card-body">
+                    <p>Convert between different image, video, and audio formats with just a few clicks.</p>
+                    <a href="format-converter.html" class="tool-button">Coming Soon</a>
+                </div>
+            </div>
+            
+            <div class="tool-card">
+                <div class="tool-card-header">
+                    <i class="fas fa-crop-alt"></i>
+                    <h3>Image Editor</h3>
+                </div>
+                <div class="tool-card-body">
+                    <p>Crop, resize, rotate, and apply filters to your images online without any software.</p>
+                    <a href="image-editor.html" class="tool-button">Coming Soon</a>
+                </div>
+            </div>
+            
+            <div class="tool-card">
+                <div class="tool-card-header">
+                    <i class="fas fa-video"></i>
+                    <h3>Video Compressor</h3>
+                </div>
+                <div class="tool-card-body">
+                    <p>Reduce video file size while maintaining quality. Perfect for sharing online.</p>
+                    <a href="video-compressor.html" class="tool-button">Coming Soon</a>
+                </div>
+            </div>
+            
+            <div class="tool-card">
+                <div class="tool-card-header">
+                    <i class="fas fa-file-audio"></i>
+                    <h3>Audio Tools</h3>
+                </div>
+                <div class="tool-card-body">
+                    <p>Convert, trim, and enhance audio files. Extract audio from video files.</p>
+                    <a href="audio-tools.html" class="tool-button">Coming Soon</a>
+                </div>
+            </div>
+            
+            <div class="tool-card">
+                <div class="tool-card-header">
+                    <i class="fas fa-qrcode"></i>
+                    <h3>QR Generator</h3>
+                </div>
+                <div class="tool-card-body">
+                    <p>Create custom QR codes for URLs, contact information, and more.</p>
+                    <a href="qr-generator.html" class="tool-button">Coming Soon</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="features">
+        <div class="container">
+            <h2 class="section-title">Why Choose MFX Media Tools</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <i class="fas fa-bolt"></i>
+                    <h3>Fast Processing</h3>
+                    <p>All tools work directly in your browser for instant results without waiting for uploads.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <i class="fas fa-lock"></i>
+                    <h3>Privacy Focused</h3>
+                    <p>Your files never leave your computer. We don't store or access your media.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <i class="fas fa-dollar-sign"></i>
+                    <h3>Completely Free</h3>
+                    <p>All our tools are free to use with no hidden fees or watermarks.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <i class="fas fa-desktop"></i>
+                    <h3>No Installation</h3>
+                    <p>Use our tools directly in your browser without downloading any software.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <i class="fas fa-thumbs-up"></i>
+                    <h3>Easy to Use</h3>
+                    <p>Simple and intuitive interfaces designed for users of all skill levels.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <i class="fas fa-shield-alt"></i>
+                    <h3>Safe & Secure</h3>
+                    <p>All processing happens locally on your device for maximum security.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer id="contact">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>MFX MEDIA TOOLS</h3>
+                    <p>Your all-in-one solution for media processing needs. Fast, free, and privacy-focused tools.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-github"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Tools</h3>
+                    <ul>
+                        <li><a href="img-compress.html">Image Compressor</a></li>
+                        <li><a href="format-converter.html">Format Converter</a></li>
+                        <li><a href="image-editor.html">Image Editor</a></li>
+                        <li><a href="video-compressor.html">Video Compressor</a></li>
+                        <li><a href="audio-tools.html">Audio Tools</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Resources</h3>
+                    <ul>
+                        <li><a href="#">Blog</a></li>
+                        <li><a href="#">Tutorials</a></li>
+                        <li><a href="#">FAQs</a></li>
+                        <li><a href="#">Support</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Legal</h3>
+                    <ul>
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Terms of Service</a></li>
+                        <li><a href="#">Cookie Policy</a></li>
+                        <li><a href="#">GDPR Compliance</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                <p>&copy; 2023 MFX MEDIA TOOLS. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Simple JavaScript for mobile menu toggle
+        document.querySelector('.mobile-menu-btn').addEventListener('click', function() {
+            const nav = document.querySelector('nav ul');
+            if (nav.style.display === 'flex') {
+                nav.style.display = 'none';
+            } else {
+                nav.style.display = 'flex';
+                nav.style.flexDirection = 'column';
+                
